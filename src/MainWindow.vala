@@ -288,7 +288,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         inputModeCombo.changed.connect (inputModeChanged);
 
         lineEndModeCombo = (ComboBox) builder.get_object ("termination_mode");
-        MoUtils.populateComboBox (lineEndModeCombo, serialConnection.LineEndStrings);
+        MoUtils.populateComboBox (lineEndModeCombo, SerialConnection.LineEndStrings);
         lineEndModeCombo.set_active (SerialConnection.LineEnd.CRLF);
 
         // setup recent chooser
@@ -472,7 +472,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
                 s = s.next_char ();
             }
 
-            string t = serialConnection.LineEndValues[lineEndModeCombo.get_active ()];
+            string t = SerialConnection.LineEndValues[lineEndModeCombo.get_active ()];
             len = t.length;
 
             for (int x = 0; x < len; x++) {
