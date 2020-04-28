@@ -529,7 +529,6 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         }
         bytecountbar.pop (bytecountbarContext);
         bytecountbar.push (bytecountbarContext, serialConnection.getBytecountbarString ());
-        entry.set_text ("");
 
         /* Start listening for an echo */
         serialConnection.echoCompare = "";
