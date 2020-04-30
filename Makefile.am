@@ -29,6 +29,7 @@ BUILT_SOURCES = src/moserial.vala.stamp src/resources.c
 bin_PROGRAMS = moserial
 
 moserial_VALASOURCES = \
+	src/DefineMacrosDialog.vala \
 	src/MainWindow.vala \
 	src/Main.vala \
 	src/SettingsDialog.vala \

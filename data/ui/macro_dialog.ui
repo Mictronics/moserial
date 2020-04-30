@@ -1,0 +1,1280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkWindow" id="macro_window">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Set Macros</property>
+    <property name="resizable">False</property>
+    <property name="window_position">center</property>
+    <property name="destroy_with_parent">True</property>
+    <child>
+      <object class="GtkGrid">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="border_width">5</property>
+        <property name="row_spacing">3</property>
+        <property name="column_spacing">3</property>
+        <child>
+          <object class="GtkEntry" id="inputMacro1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro1">
+            <property name="label" translatable="yes">M1</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Transmit Macro</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Send</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Cycle [ms]</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_bottom">5</property>
+            <property name="spacing">3</property>
+            <child>
+              <object class="GtkButton" id="buttonLoadMacros">
+                <property name="label" translatable="yes">Load</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="buttonSaveMacros">
+                <property name="label" translatable="yes">Save</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro2">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro3">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro4">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro5">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">6</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro6">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">7</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro7">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">8</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro8">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">9</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro9">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">10</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro10">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">11</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro11">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">12</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro12">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">13</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro13">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">14</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro14">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">15</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro15">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">16</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro16">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">17</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro17">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">18</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro18">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">19</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro19">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">20</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro20">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">21</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro21">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">22</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro22">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">23</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro23">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">24</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="inputMacro24">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">35</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">25</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro2">
+            <property name="label" translatable="yes">M2</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro3">
+            <property name="label" translatable="yes">M3</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro4">
+            <property name="label" translatable="yes">M4</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro5">
+            <property name="label" translatable="yes">M5</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">6</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro6">
+            <property name="label" translatable="yes">M6</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">7</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro7">
+            <property name="label" translatable="yes">M7</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">8</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro8">
+            <property name="label" translatable="yes">M8</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">9</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro9">
+            <property name="label" translatable="yes">M9</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">10</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro10">
+            <property name="label" translatable="yes">M10</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">11</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro11">
+            <property name="label" translatable="yes">M11</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">12</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro12">
+            <property name="label" translatable="yes">M12</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">13</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro13">
+            <property name="label" translatable="yes">M13</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">14</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro14">
+            <property name="label" translatable="yes">M14</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">15</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro15">
+            <property name="label" translatable="yes">M15</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">16</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro16">
+            <property name="label" translatable="yes">M16</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">17</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro17">
+            <property name="label" translatable="yes">M17</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">18</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro18">
+            <property name="label" translatable="yes">M18</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">19</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro19">
+            <property name="label" translatable="yes">M19</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">20</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro20">
+            <property name="label" translatable="yes">M20</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">21</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro21">
+            <property name="label" translatable="yes">M21</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">22</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro22">
+            <property name="label" translatable="yes">M22</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">23</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro23">
+            <property name="label" translatable="yes">M23</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">24</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonMacro24">
+            <property name="label" translatable="yes">M24</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">25</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro2">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro3">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro4">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro5">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">6</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro6">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">7</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro7">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">8</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro8">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">9</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro9">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">10</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro10">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">11</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro11">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">12</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro12">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">13</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro13">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">14</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro14">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">15</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro15">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">16</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro16">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">17</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro17">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">18</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro18">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">19</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro19">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">20</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro20">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">21</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro21">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">22</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro22">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">23</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro23">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">24</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="cycleMacro24">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">5</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="input_purpose">number</property>
+            <property name="climb_rate">1</property>
+            <property name="numeric">True</property>
+            <property name="update_policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">25</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro2">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro3">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro4">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro5">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">6</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro6">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">7</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro7">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">8</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro8">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">9</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro9">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">10</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro10">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">11</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro11">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">12</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro12">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">13</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro13">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">14</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro14">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">15</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro15">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">16</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro16">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">17</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro17">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">18</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro18">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">19</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro19">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">20</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro20">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">21</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro21">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">22</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro22">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">23</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro23">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">24</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSwitch" id="activateMacro24">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">25</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

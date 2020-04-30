@@ -1,4 +1,5 @@
 glade_DATA =				\
+	macro_dialog.ui			\	
 	mainwindow.ui			\
 	preferences.ui			\
 	receive_chooser.ui		\

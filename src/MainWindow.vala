@@ -103,6 +103,8 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
     private Button outgoingClearButton;
     private ToggleButton dtrButton;
     private ToggleButton rtsButton;
+    private Button defineMacrosButton;
+    private DefineMacrosDialog defineMacrosDialog;
 
     private const string recentGroup = "moserial-configs";
     private Gtk.RecentData recentData;
@@ -208,7 +210,6 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         receiveChooserDialog.startTransfer.connect (this.doReceive);
         xmodemFilenameDialog = new XmodemFilenameDialog (this.gtkWindow);
         rz = new Rzwrapper (Rzwrapper.Protocol.NULL, null, null, null);
-
 
         // setup recording
         recordDialog = new RecordDialog (this.gtkWindow);
@@ -353,6 +354,10 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         outgoingClearButton = (Button) builder.get_object ("buttonOutgoingClear");
         outgoingClearButton.clicked.connect (clearOutgoing);
         outgoingClearButton.set_tooltip_text (_("Clear outgoing text box."));
+
+        // setup macros dialog and buttons
+        defineMacrosButton = (Button) builder.get_object ("buttonDefineMacros");
+        defineMacrosButton.clicked.connect (onDefineMacrosButtonClick);
 
         // take currentSettings into account for outgoing input area
         updateOutgoingInputArea ();
@@ -1099,6 +1104,10 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         this.clearOutgoing ();
         this.clearIncoming ();
         entry.set_text ("");
+    }
+
+    private void onDefineMacrosButtonClick (Button btn) {
+        defineMacrosDialog = new DefineMacrosDialog (gtkWindow);
     }
 }
 
