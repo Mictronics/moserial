@@ -30,6 +30,7 @@ bin_PROGRAMS = moserial
 
 moserial_VALASOURCES = \
 	src/DefineMacrosDialog.vala \
+	src/Macros.vala \
 	src/MainWindow.vala \
 	src/Main.vala \
 	src/SettingsDialog.vala \

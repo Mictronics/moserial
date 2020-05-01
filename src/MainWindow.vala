@@ -105,6 +105,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
     private ToggleButton rtsButton;
     private Button defineMacrosButton;
     private DefineMacrosDialog defineMacrosDialog;
+    private Macros macros;
 
     private const string recentGroup = "moserial-configs";
     private Gtk.RecentData recentData;
@@ -355,7 +356,8 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         outgoingClearButton.clicked.connect (clearOutgoing);
         outgoingClearButton.set_tooltip_text (_("Clear outgoing text box."));
 
-        // setup macros dialog and buttons
+        // setup macros, dialog and buttons
+        macros = new Macros ();
         defineMacrosButton = (Button) builder.get_object ("buttonDefineMacros");
         defineMacrosButton.clicked.connect (onDefineMacrosButtonClick);
 
@@ -1107,7 +1109,9 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
     }
 
     private void onDefineMacrosButtonClick (Button btn) {
-        defineMacrosDialog = new DefineMacrosDialog (gtkWindow);
+        defineMacrosDialog = new DefineMacrosDialog (gtkWindow, this.macros);
+        for (int i = 0; i < Macros.maxMacroCount; i++) {
+        }
     }
 }
 
