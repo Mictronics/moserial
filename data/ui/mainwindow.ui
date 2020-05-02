@@ -786,7 +786,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro1">
+                  <object class="GtkButton" id="buttonMacro1">
                     <property name="label" translatable="yes">M1</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -798,7 +798,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro2">
+                  <object class="GtkButton" id="buttonMacro2">
                     <property name="label" translatable="yes">M2</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -810,7 +810,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro3">
+                  <object class="GtkButton" id="buttonMacro3">
                     <property name="label" translatable="yes">M3</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -822,7 +822,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro4">
+                  <object class="GtkButton" id="buttonMacro4">
                     <property name="label" translatable="yes">M4</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -834,7 +834,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro5">
+                  <object class="GtkButton" id="buttonMacro5">
                     <property name="label" translatable="yes">M5</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -846,7 +846,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro6">
+                  <object class="GtkButton" id="buttonMacro6">
                     <property name="label" translatable="yes">M6</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -858,7 +858,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro7">
+                  <object class="GtkButton" id="buttonMacro7">
                     <property name="label" translatable="yes">M7</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -870,7 +870,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro13">
+                  <object class="GtkButton" id="buttonMacro13">
                     <property name="label" translatable="yes">M13</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -882,7 +882,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro14">
+                  <object class="GtkButton" id="buttonMacro14">
                     <property name="label" translatable="yes">M14</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -894,7 +894,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro15">
+                  <object class="GtkButton" id="buttonMacro15">
                     <property name="label" translatable="yes">M15</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -906,7 +906,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro16">
+                  <object class="GtkButton" id="buttonMacro16">
                     <property name="label" translatable="yes">M16</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -918,7 +918,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro17">
+                  <object class="GtkButton" id="buttonMacro17">
                     <property name="label" translatable="yes">M17</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -930,7 +930,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro18">
+                  <object class="GtkButton" id="buttonMacro18">
                     <property name="label" translatable="yes">M18</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -942,7 +942,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro19">
+                  <object class="GtkButton" id="buttonMacro19">
                     <property name="label" translatable="yes">M19</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -954,7 +954,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro8">
+                  <object class="GtkButton" id="buttonMacro8">
                     <property name="label" translatable="yes">M8</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -966,7 +966,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro20">
+                  <object class="GtkButton" id="buttonMacro20">
                     <property name="label" translatable="yes">M20</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -978,7 +978,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro21">
+                  <object class="GtkButton" id="buttonMacro21">
                     <property name="label" translatable="yes">M21</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -990,7 +990,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro9">
+                  <object class="GtkButton" id="buttonMacro9">
                     <property name="label" translatable="yes">M9</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -1002,7 +1002,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro10">
+                  <object class="GtkButton" id="buttonMacro10">
                     <property name="label" translatable="yes">M10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -1014,7 +1014,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro22">
+                  <object class="GtkButton" id="buttonMacro22">
                     <property name="label" translatable="yes">M22</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -1026,7 +1026,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro11">
+                  <object class="GtkButton" id="buttonMacro11">
                     <property name="label" translatable="yes">M11</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -1038,7 +1038,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro23">
+                  <object class="GtkButton" id="buttonMacro23">
                     <property name="label" translatable="yes">M23</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -1050,7 +1050,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro12">
+                  <object class="GtkButton" id="buttonMacro12">
                     <property name="label" translatable="yes">M12</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -1062,7 +1062,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToggleButton" id="buttonMacro24">
+                  <object class="GtkButton" id="buttonMacro24">
                     <property name="label" translatable="yes">M24</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
