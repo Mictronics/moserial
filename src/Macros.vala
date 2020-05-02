@@ -18,7 +18,7 @@
  */
 
 public class moserial.Macro : GLib.Object {
-
+    private int index;
     private bool isActive;
     public bool IsActive {
         get {
@@ -26,6 +26,9 @@ public class moserial.Macro : GLib.Object {
         }
         set {
             isActive = value;
+            if (isActive) {
+                GLib.Timeout.add (cycle, (GLib.SourceFunc)onCycleTimeout, Priority.DEFAULT);
+            }
         }
     }
 
@@ -55,15 +58,25 @@ public class moserial.Macro : GLib.Object {
             return text;
         }
         set {
-            Text = value;
+            text = value;
         }
     }
 
-    public Macro () {
+    public signal void sendMacro (int index);
+
+    public Macro (int index) {
+        this.index = index;
         text = "";
         isHex = false;
         cycle = 1000;
         isActive = false;
+    }
+
+    private bool onCycleTimeout () {
+        // Trigger sending macro and keep cyclic timeout running.
+        sendMacro (index);
+        return isActive;
+        // Returning false will cancel and destroy the timeout.
     }
 }
 
@@ -74,39 +87,47 @@ public class moserial.Macros : GLib.Object {
     public Macros () {
         macros = new List<Macro>();
         for (int i = 0; i < maxMacroCount; i++) {
-            macros.append (new Macro ());
+            macros.append (new Macro (i));
         }
     }
 
-    public void SetActive (int index, bool active) {
+    public Macro getMacro (int index) {
+        return macros.nth_data (index);
+    }
+
+    public void setActive (int index, bool active) {
         macros.nth_data (index).IsActive = active;
     }
 
-    public bool GetActive (int index) {
+    public bool getActive (int index) {
         return macros.nth_data (index).IsActive;
     }
 
-    public void SetHex (int index, bool hex) {
+    public void setHex (int index, bool hex) {
         macros.nth_data (index).IsHex = hex;
     }
 
-    public bool GetHex (int index) {
+    public bool getHex (int index) {
         return macros.nth_data (index).IsHex;
     }
 
-    public void SetCycle (int index, int cycle) {
+    public void setCycle (int index, int cycle) {
         macros.nth_data (index).Cycle = cycle;
     }
 
-    public int GetCycle (int index) {
+    public int getCycle (int index) {
         return macros.nth_data (index).Cycle;
     }
 
-    public void SetText (int index, string text) {
+    public void setText (int index, string text) {
         macros.nth_data (index).Text = text;
     }
 
-    public string GetText (int index) {
+    public string getText (int index) {
         return macros.nth_data (index).Text;
+    }
+
+    public void send (int index) {
+        macros.nth_data (index).sendMacro (index);
     }
 }

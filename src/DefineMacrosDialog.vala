@@ -30,7 +30,7 @@ public class moserial.DefineMacrosDialog : GLib.Object {
         builder = new Gtk.Builder.from_resource (Config.UIROOT + "macro_dialog.ui");
         var window = (Window) builder.get_object ("macro_window");
         window.set_transient_for (parent);
-        window.destroy.connect (OnWindowDestroy);
+        window.destroy.connect (onWindowDestroy);
 
         Entry inp;
         SpinButton cb;
@@ -41,66 +41,66 @@ public class moserial.DefineMacrosDialog : GLib.Object {
             // Init all text input fields
             inp = (Entry) builder.get_object ("inputMacro%i".printf (i + 1));
             inp.set_tooltip_text (_("Enter macro text and press ENTER to activate your input."));
-            inp.set_text (this.macros.GetText (i));
-            inp.activate.connect (OnTextChanged);
+            inp.set_text (this.macros.getText (i));
+            inp.activate.connect (onTextChanged);
             // Init all cycle spinners
             cb = (SpinButton) builder.get_object ("cycleMacro%i".printf (i + 1));
             cb.adjustment.lower = 1;
             cb.adjustment.upper = 10000;
             cb.adjustment.step_increment = 1;
             cb.adjustment.page_increment = 100;
-            cb.set_value (this.macros.GetCycle (i));
-            cb.value_changed.connect (OnCycleButtonChanged);
+            cb.set_value (this.macros.getCycle (i));
+            cb.value_changed.connect (onCycleButtonChanged);
             // Init all activate switched
             sw = (Switch) builder.get_object ("activateMacro%i".printf (i + 1));
             sw.set_tooltip_text (_("Toggle cyclic macro transmission."));
-            sw.set_state (this.macros.GetActive (i));
-            sw.set_active (this.macros.GetActive (i));
-            sw.state_set.connect (OnActiveSwitchChanged);
+            sw.set_state (this.macros.getActive (i));
+            sw.set_active (this.macros.getActive (i));
+            sw.state_set.connect (onActiveSwitchChanged);
             // Init all hex checkboxes
             tb = (ToggleButton) builder.get_object ("isHex%i".printf (i + 1));
-            tb.set_active (this.macros.GetHex (i));
-            tb.toggled.connect (OnHexToggled);
+            tb.set_active (this.macros.getHex (i));
+            tb.toggled.connect (onHexToggled);
             // Init all send buttons
             btn = (Button) builder.get_object ("buttonMacro%i".printf (i + 1));
-            btn.clicked.connect (OnSendButtonClick);
+            btn.clicked.connect (onSendButtonClick);
         }
 
         window.show_all ();
     }
 
-    public void SetCycleButton (int number, int val) {
+    public void setCycleButton (int number, int val) {
         ((SpinButton) builder.get_object ("cycleMacro%i".printf (number))).value = val;
     }
 
-    public void SetActive (int number, bool val) {
+    public void setActive (int number, bool val) {
         Switch sw = (Switch) builder.get_object ("activeMacro%i".printf (number));
         sw.set_active (val);
         sw.set_state (val);
     }
 
-    private void OnWindowDestroy (Widget w) {
+    private void onWindowDestroy (Widget w) {
         GLib.print ("Window closing\n\r");
     }
 
-    private void OnCycleButtonChanged (SpinButton btn) {
-        this.macros.SetCycle (int.parse (btn.get_name ().splice (0, 10)), btn.get_value_as_int ());
+    private void onCycleButtonChanged (SpinButton btn) {
+        this.macros.setCycle (int.parse (btn.get_name ().splice (0, 10)) - 1, btn.get_value_as_int ());
     }
 
-    private bool OnActiveSwitchChanged (Switch sw, bool state) {
-        this.macros.SetActive (int.parse (sw.get_name ().splice (0, 13)), state);
+    private bool onActiveSwitchChanged (Switch sw, bool state) {
+        this.macros.setActive (int.parse (sw.get_name ().splice (0, 13)) - 1, state);
         return false;
     }
 
-    private void OnHexToggled (ToggleButton tb) {
-        this.macros.SetHex (int.parse (tb.get_name ().splice (0, 5)), tb.get_active ());
+    private void onHexToggled (ToggleButton tb) {
+        this.macros.setHex (int.parse (tb.get_name ().splice (0, 5)) - 1, tb.get_active ());
     }
 
-    private void OnTextChanged (Entry inp) {
-        this.macros.SetText (int.parse (inp.get_name ().splice (0, 10)), inp.get_text ());
+    private void onTextChanged (Entry inp) {
+        this.macros.setText (int.parse (inp.get_name ().splice (0, 10)) - 1, inp.get_text ());
     }
 
-    private void OnSendButtonClick (Button btn) {
-        GLib.print (btn.get_name ());
+    private void onSendButtonClick (Button btn) {
+        this.macros.send (int.parse (btn.get_name ().splice (0, 11)) - 1);
     }
 }

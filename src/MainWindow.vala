@@ -115,6 +115,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
     public MainWindow (string ? profileFilename) {
         GLib.Object (startupProfileFilename: profileFilename);
     }
+
     construct {
         var builder = new Gtk.Builder.from_resource (Config.UIROOT + "mainwindow.ui");
 
@@ -283,11 +284,11 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
 
         // setup entry
         sendButton = (Button) builder.get_object ("send");
-        sendButton.clicked.connect (sendString);
+        sendButton.clicked.connect (onSendButtonClicked);
         sendButton.set_tooltip_text (_("Send the outgoing data now."));
         entry = (Gtk.Entry)builder.get_object ("entry");
         entry.set_text (profile.getInputString ());
-        entry.activate.connect (sendString);
+        entry.activate.connect (onSendButtonClicked);
         entry.set_tooltip_text (_("Type outgoing data here. Press Enter or Send to send it."));
 
         inputModeCombo = (ComboBox) builder.get_object ("input_mode");
@@ -481,9 +482,15 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         buf.insert (ref iter, builder.str, (int) builder.str.length);
     }
 
-    public void sendString (Widget w) {
-        string s;
-        s = entry.get_text ();
+    private void onSendButtonClicked (Widget w) {
+        if (inputModeCombo.get_active () == inputModeValues.ASCII) {
+            sendString (entry.get_text (), false);
+        } else {
+            sendString (entry.get_text (), true);
+        }
+    }
+
+    public void sendString (string s, bool isHex) {
         profile.setInputString (s);
         if (!ensureConnected ()) {
             return;
@@ -492,7 +499,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         serialConnection.echoReference = s;
 
         long len;
-        if (inputModeCombo.get_active () == inputModeValues.ASCII) {
+        if (!isHex) {
             len = s.length;
 
             for (int x = 0; x < len; x++) {
@@ -1111,7 +1118,13 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
     private void onDefineMacrosButtonClick (Button btn) {
         defineMacrosDialog = new DefineMacrosDialog (gtkWindow, this.macros);
         for (int i = 0; i < Macros.maxMacroCount; i++) {
+            macros.getMacro (i).sendMacro.connect (onSendMacro);
         }
+    }
+
+    private void onSendMacro (int index) {
+        Macro m = macros.getMacro (index);
+        sendString (m.Text, m.IsHex);
     }
 }
 
