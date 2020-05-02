@@ -65,6 +65,12 @@ public class moserial.DefineMacrosDialog : GLib.Object {
             btn.clicked.connect (onSendButtonClick);
         }
 
+        btn = (Button) builder.get_object ("buttonLoadMacros");
+        btn.clicked.connect (onLoadButtonClick);
+
+        btn = (Button) builder.get_object ("buttonSaveMacros");
+        btn.clicked.connect (onSaveButtonClick);
+
         window.show_all ();
     }
 

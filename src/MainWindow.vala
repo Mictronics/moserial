@@ -360,6 +360,11 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         // setup macros, dialog and buttons
         macros = new Macros ();
         macros.loadFromProfile (profile);
+        for (int i = 0; i < Macros.maxMacroCount; i++) {
+            macros.getMacro (i).sendMacro.connect (onSendMacro);
+            Button btn = (Button) builder.get_object ("buttonMacro%i".printf (i + 1));
+            btn.clicked.connect (onSendMacroButtonClick);
+        }
         defineMacrosButton = (Button) builder.get_object ("buttonDefineMacros");
         defineMacrosButton.clicked.connect (onDefineMacrosButtonClick);
 
@@ -1121,9 +1126,10 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
 
     private void onDefineMacrosButtonClick (Button btn) {
         defineMacrosDialog = new DefineMacrosDialog (gtkWindow, this.macros);
-        for (int i = 0; i < Macros.maxMacroCount; i++) {
-            macros.getMacro (i).sendMacro.connect (onSendMacro);
-        }
+    }
+
+    private void onSendMacroButtonClick (Button btn) {
+        onSendMacro (int.parse (btn.get_name ().splice (0, 11)) - 1);
     }
 
     private void onSendMacro (int index) {
