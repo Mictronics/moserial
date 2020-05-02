@@ -359,6 +359,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
 
         // setup macros, dialog and buttons
         macros = new Macros ();
+        macros.loadFromProfile (profile);
         defineMacrosButton = (Button) builder.get_object ("buttonDefineMacros");
         defineMacrosButton.clicked.connect (onDefineMacrosButtonClick);
 
@@ -426,6 +427,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
             currentSettings = Settings.loadFromProfile (profile);
             currentPreferences = Preferences.loadFromProfile (profile);
             currentPaths = DefaultPaths.loadFromProfile (profile);
+            macros.loadFromProfile (profile);
             updateOutgoingInputArea ();
             updatePreferences (null, currentPreferences);
             statusbar.pop (statusbarContext);
@@ -1000,6 +1002,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         currentPreferences.saveToProfile (profile);
         currentSettings.saveToProfile (profile);
         currentPaths.saveToProfile (profile);
+        macros.saveToProfile (profile);
         if (profileFilename != null) {
             if (profileChanged) {
                 var dialog = new MessageDialog (gtkWindow, DialogFlags.DESTROY_WITH_PARENT, MessageType.QUESTION, ButtonsType.YES_NO, "%s", _("You have changed your setting or preferences. Do you want to save these changes to the loaded profile?"));
@@ -1021,6 +1024,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         currentPreferences.saveToProfile (profile);
         currentSettings.saveToProfile (profile);
         currentPaths.saveToProfile (profile);
+        macros.saveToProfile (profile);
         if (profileFilename == null)
             saveProfileAs ();
         if (profileFilename == null)

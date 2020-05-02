@@ -30,7 +30,6 @@ public class moserial.DefineMacrosDialog : GLib.Object {
         builder = new Gtk.Builder.from_resource (Config.UIROOT + "macro_dialog.ui");
         var window = (Window) builder.get_object ("macro_window");
         window.set_transient_for (parent);
-        window.destroy.connect (onWindowDestroy);
 
         Entry inp;
         SpinButton cb;
@@ -77,10 +76,6 @@ public class moserial.DefineMacrosDialog : GLib.Object {
         Switch sw = (Switch) builder.get_object ("activeMacro%i".printf (number));
         sw.set_active (val);
         sw.set_state (val);
-    }
-
-    private void onWindowDestroy (Widget w) {
-        GLib.print ("Window closing\n\r");
     }
 
     private void onCycleButtonChanged (SpinButton btn) {

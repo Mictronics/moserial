@@ -58,7 +58,11 @@ public class moserial.Macro : GLib.Object {
             return text;
         }
         set {
-            text = value;
+            if (value == null) {
+                text = "";
+            } else {
+                text = value;
+            }
         }
     }
 
@@ -129,5 +133,24 @@ public class moserial.Macros : GLib.Object {
 
     public void send (int index) {
         macros.nth_data (index).sendMacro (index);
+    }
+
+    public void saveToProfile (Profile profile) {
+        for (int i = 0; i < maxMacroCount; i++) {
+            string g = "macro%u".printf (i);
+            profile.keyFile.set_boolean (g, "is_hex", macros.nth_data (i).IsHex);
+            profile.keyFile.set_integer (g, "cycle", macros.nth_data (i).Cycle);
+            profile.keyFile.set_string (g, "text", macros.nth_data (i).Text);
+            // We don't save isActive here because macros shall be deactivated by default when application is loaded.
+        }
+    }
+
+    public void loadFromProfile (Profile profile) {
+        for (int i = 0; i < maxMacroCount; i++) {
+            string g = "macro%u".printf (i);
+            macros.nth_data (i).IsHex = MoUtils.getKeyBoolean (profile, g, "is_hex", false);
+            macros.nth_data (i).Cycle = MoUtils.getKeyInteger (profile, g, "cycle", 1000);
+            macros.nth_data (i).Text = MoUtils.getKeyString (profile, g, "text");
+        }
     }
 }
