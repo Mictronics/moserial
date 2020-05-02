@@ -31,6 +31,48 @@ public class moserial.DefineMacrosDialog : GLib.Object {
         var window = (Window) builder.get_object ("macro_window");
         window.set_transient_for (parent);
 
+        Button btn = (Button) builder.get_object ("buttonLoadMacros");
+        btn.clicked.connect (onLoadButtonClick);
+
+        btn = (Button) builder.get_object ("buttonSaveMacros");
+        btn.clicked.connect (onSaveButtonClick);
+
+        refreshDialog ();
+        window.show_all ();
+    }
+
+    public void setCycleButton (int number, int val) {
+        ((SpinButton) builder.get_object ("cycleMacro%i".printf (number))).value = val;
+    }
+
+    public void setActive (int number, bool val) {
+        Switch sw = (Switch) builder.get_object ("activeMacro%i".printf (number));
+        sw.set_active (val);
+        sw.set_state (val);
+    }
+
+    private void onCycleButtonChanged (SpinButton btn) {
+        this.macros.setCycle (int.parse (btn.get_name ().splice (0, 10)) - 1, btn.get_value_as_int ());
+    }
+
+    private bool onActiveSwitchChanged (Switch sw, bool state) {
+        this.macros.setActive (int.parse (sw.get_name ().splice (0, 13)) - 1, state);
+        return false;
+    }
+
+    private void onHexToggled (ToggleButton tb) {
+        this.macros.setHex (int.parse (tb.get_name ().splice (0, 5)) - 1, tb.get_active ());
+    }
+
+    private void onTextChanged (Entry inp) {
+        this.macros.setText (int.parse (inp.get_name ().splice (0, 10)) - 1, inp.get_text ());
+    }
+
+    private void onSendButtonClick (Button btn) {
+        this.macros.send (int.parse (btn.get_name ().splice (0, 11)) - 1);
+    }
+
+    private void refreshDialog () {
         Entry inp;
         SpinButton cb;
         Switch sw;
@@ -64,44 +106,42 @@ public class moserial.DefineMacrosDialog : GLib.Object {
             btn = (Button) builder.get_object ("buttonMacro%i".printf (i + 1));
             btn.clicked.connect (onSendButtonClick);
         }
-
-        btn = (Button) builder.get_object ("buttonLoadMacros");
-        btn.clicked.connect (onLoadButtonClick);
-
-        btn = (Button) builder.get_object ("buttonSaveMacros");
-        btn.clicked.connect (onSaveButtonClick);
-
-        window.show_all ();
     }
 
-    public void setCycleButton (int number, int val) {
-        ((SpinButton) builder.get_object ("cycleMacro%i".printf (number))).value = val;
+    private void onLoadButtonClick () {
+        string filename = "macros.conf";
+        var dialog = new FileChooserDialog (null, parent, Gtk.FileChooserAction.OPEN);
+        dialog.add_buttons ("gtk-cancel", Gtk.ResponseType.CANCEL, "gtk-open", Gtk.ResponseType.ACCEPT, null);
+        dialog.set_local_only (false);
+        int response = dialog.run ();
+        if (response == Gtk.ResponseType.ACCEPT) {
+            filename = dialog.get_filename ();
+        }
+        dialog.destroy ();
+        if (response == Gtk.ResponseType.ACCEPT) {
+            Profile profile = new Profile ();
+            profile.load (filename, parent);
+            this.macros.loadFromProfile (profile);
+            refreshDialog ();
+        }
     }
 
-    public void setActive (int number, bool val) {
-        Switch sw = (Switch) builder.get_object ("activeMacro%i".printf (number));
-        sw.set_active (val);
-        sw.set_state (val);
-    }
-
-    private void onCycleButtonChanged (SpinButton btn) {
-        this.macros.setCycle (int.parse (btn.get_name ().splice (0, 10)) - 1, btn.get_value_as_int ());
-    }
-
-    private bool onActiveSwitchChanged (Switch sw, bool state) {
-        this.macros.setActive (int.parse (sw.get_name ().splice (0, 13)) - 1, state);
-        return false;
-    }
-
-    private void onHexToggled (ToggleButton tb) {
-        this.macros.setHex (int.parse (tb.get_name ().splice (0, 5)) - 1, tb.get_active ());
-    }
-
-    private void onTextChanged (Entry inp) {
-        this.macros.setText (int.parse (inp.get_name ().splice (0, 10)) - 1, inp.get_text ());
-    }
-
-    private void onSendButtonClick (Button btn) {
-        this.macros.send (int.parse (btn.get_name ().splice (0, 11)) - 1);
+    private void onSaveButtonClick () {
+        string filename = "macros.conf";
+        var dialog = new FileChooserDialog (null, parent, Gtk.FileChooserAction.SAVE);
+        dialog.add_buttons ("gtk-cancel", Gtk.ResponseType.CANCEL, "gtk-save", Gtk.ResponseType.ACCEPT, null);
+        dialog.set_do_overwrite_confirmation (true);
+        dialog.set_local_only (false);
+        dialog.set_current_name (filename);
+        int response = dialog.run ();
+        if (response == Gtk.ResponseType.ACCEPT) {
+            filename = dialog.get_filename ();
+        }
+        dialog.destroy ();
+        if (response == Gtk.ResponseType.ACCEPT) {
+            Profile profile = new Profile ();
+            this.macros.saveToProfile (profile);
+            profile.save (filename, parent);
+        }
     }
 }
