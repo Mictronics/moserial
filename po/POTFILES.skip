@@ -1,7 +1,9 @@
 src/AutoScroll.c
 src/DefaultPaths.c
+src/DefineMacrosDialog.c
 src/HexTextBuffer.c
 src/InputParser.c
+src/Macros.c
 src/Main.c
 src/MainWindow.c
 src/MoUtils.c

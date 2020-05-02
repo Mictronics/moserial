@@ -1,5 +1,6 @@
 [encoding: UTF-8]
 # List of source files which contain translatable strings.
+[type: gettext/glade]data/ui/macro_dialog.ui
 [type: gettext/glade]data/ui/mainwindow.ui
 [type: gettext/glade]data/ui/preferences.ui
 [type: gettext/glade]data/ui/receive_chooser.ui
@@ -11,6 +12,7 @@
 [type: gettext/glade]data/ui/xmodem_filename_dialog.ui
 data/moserial.desktop.in
 data/moserial.appdata.xml.in
+src/DefineMacrosDialog.vala
 src/InputParser.vala
 src/Main.vala
 src/MainWindow.vala
