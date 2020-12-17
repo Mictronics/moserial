@@ -1,6 +1,8 @@
 Version 3.0.13
 --------------
 
+	* Strip any non hexadecimal characters from input string when in hex mode.
+	* Mark active macros by red label on button.
 	* Add transmission macros
 	* Save and restore outgoing input string from profile.
 	* Save and restore input line ending from profile
