@@ -29,6 +29,7 @@ public class moserial.Macro : GLib.Object {
             if (isActive) {
                 GLib.Timeout.add (cycle, (GLib.SourceFunc)onCycleTimeout, Priority.DEFAULT);
             }
+            this.activeStatusChange(index);
         }
     }
 
@@ -67,6 +68,7 @@ public class moserial.Macro : GLib.Object {
     }
 
     public signal void sendMacro (int index);
+    public signal void activeStatusChange(int index);
 
     public Macro (int index) {
         this.index = index;

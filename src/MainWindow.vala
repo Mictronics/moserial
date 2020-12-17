@@ -35,6 +35,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         N_ ("You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.")
     };
 
+    private Gtk.Builder gtkBuilder;
     private Gtk.Window gtkWindow;
     private SettingsDialog settingsDialog;
     private ToolButton settingsButton;
@@ -117,11 +118,11 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
     }
 
     construct {
-        var builder = new Gtk.Builder.from_resource (Config.UIROOT + "mainwindow.ui");
+        gtkBuilder = new Gtk.Builder.from_resource (Config.UIROOT + "mainwindow.ui");
 
         // setup window
-        gtkWindow = (Gtk.Window)builder.get_object ("window");
-        ag = (Gtk.AccelGroup)builder.get_object ("accelgroup1");
+        gtkWindow = (Gtk.Window)gtkBuilder.get_object ("window");
+        ag = (Gtk.AccelGroup)gtkBuilder.get_object ("accelgroup1");
         gtkWindow.add_accel_group (ag);
         // gtkWindow.add_accelerator(gtkWindow, "<Control>b", signal="backspace")
         gtkWindow.destroy.connect (quitSave);
@@ -140,64 +141,64 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         }
 
         // setup paned
-        paned = (Paned) builder.get_object ("vpaned");
+        paned = (Paned) gtkBuilder.get_object ("vpaned");
         if (panedPosition >= -1)
             paned.set_position (panedPosition);
         else
             paned.set_position (-1);
 
         // setup menu items
-        Gtk.MenuItem quit = (Gtk.MenuItem)builder.get_object ("menubar_quit");
+        Gtk.MenuItem quit = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_quit");
         quit.activate.connect (quitSizeSave);
-        Gtk.MenuItem saveAs = (Gtk.MenuItem)builder.get_object ("menubar_save_settings_as");
+        Gtk.MenuItem saveAs = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_save_settings_as");
         saveAs.activate.connect (saveProfileAs);
-        Gtk.MenuItem save = (Gtk.MenuItem)builder.get_object ("menubar_save_settings");
+        Gtk.MenuItem save = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_save_settings");
         save.activate.connect (saveProfile);
-        Gtk.MenuItem open = (Gtk.MenuItem)builder.get_object ("menubar_open_settings");
+        Gtk.MenuItem open = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_open_settings");
         open.activate.connect (loadProfile);
-        copyMenuItem = (Gtk.MenuItem)builder.get_object ("menubar_copy");
+        copyMenuItem = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_copy");
         copyMenuItem.activate.connect (this.copy);
-        Gtk.MenuItem editMenuItem = (Gtk.MenuItem)builder.get_object ("menubar_edit");
+        Gtk.MenuItem editMenuItem = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_edit");
         editMenuItem.activate.connect (this.editMenu);
-        cutMenuItem = (Gtk.MenuItem)builder.get_object ("menubar_cut");
+        cutMenuItem = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_cut");
         copyMenuItem.set_sensitive (false);
         cutMenuItem.set_sensitive (false);
         cutMenuItem.activate.connect (this.cut);
-        Gtk.MenuItem pasteMenuItem = (Gtk.MenuItem)builder.get_object ("menubar_paste");
+        Gtk.MenuItem pasteMenuItem = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_paste");
         pasteMenuItem.activate.connect (this.paste);
-        Gtk.MenuItem clearMenuItem = (Gtk.MenuItem)builder.get_object ("menubar_clear");
+        Gtk.MenuItem clearMenuItem = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_clear");
         clearMenuItem.activate.connect (this.clear);
 
         // setup the Port Settings Dialog
         settingsDialog = new SettingsDialog (this.gtkWindow);
         settingsDialog.updateSettings.connect (this.updateSettings);
-        settingsButton = (ToolButton) builder.get_object ("toolbar_settings");
+        settingsButton = (ToolButton) gtkBuilder.get_object ("toolbar_settings");
         settingsButton.clicked.connect (this.showSettingsDialog);
         settingsButton.set_tooltip_text (_("Port configuration"));
 
         // setup the Help button
-        ToolButton helpButton = (ToolButton) builder.get_object ("toolbar_help");
+        ToolButton helpButton = (ToolButton) gtkBuilder.get_object ("toolbar_help");
         helpButton.clicked.connect (showHelpButton);
         helpButton.set_tooltip_text (_("Read the manual"));
 
         // setup the statusbar
-        statusbar = (Statusbar) builder.get_object ("statusbar");
+        statusbar = (Statusbar) gtkBuilder.get_object ("statusbar");
         statusbarContext = statusbar.get_context_id ("moserial port status");
         statusbar.push (statusbarContext, currentSettings.getStatusbarString (false));
 
         // setup the byte count bar
-        bytecountbar = (Statusbar) builder.get_object ("bytecountbar");
+        bytecountbar = (Statusbar) gtkBuilder.get_object ("bytecountbar");
         bytecountbarContext = statusbar.get_context_id ("moserial byte counts");
         bytecountbar.push (bytecountbarContext, _("TX: 0, RX: 0"));
 
         // setup the about dialog
-        Gtk.MenuItem about = (Gtk.MenuItem)builder.get_object ("menubar_about");
+        Gtk.MenuItem about = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_about");
         about.activate.connect (showAboutDialog);
 
         // setup send
         sendProgressDialog = new SendProgressDialog (this.gtkWindow);
         sendChooserDialog = new SendChooserDialog (this.gtkWindow);
-        send = (ToolButton) builder.get_object ("toolbar_send");
+        send = (ToolButton) gtkBuilder.get_object ("toolbar_send");
         send.clicked.connect (doSendChooser);
         send.set_tooltip_text (_("Send a file"));
         sendChooserDialog.startTransfer.connect (this.doSend);
@@ -206,7 +207,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         // setup receive
         receiveProgressDialog = new ReceiveProgressDialog (this.gtkWindow);
         receiveChooserDialog = new ReceiveChooserDialog (this.gtkWindow);
-        receive = (ToolButton) builder.get_object ("toolbar_receive");
+        receive = (ToolButton) gtkBuilder.get_object ("toolbar_receive");
         receive.clicked.connect (doReceiveChooser);
         receive.set_tooltip_text (_("Receive a file"));
         receiveChooserDialog.startTransfer.connect (this.doReceive);
@@ -215,39 +216,39 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
 
         // setup recording
         recordDialog = new RecordDialog (this.gtkWindow);
-        recordButton = (ToggleToolButton) builder.get_object ("toolbar_logging");
+        recordButton = (ToggleToolButton) gtkBuilder.get_object ("toolbar_logging");
         recordButton.toggled.connect (this.record);
         recordButton.set_tooltip_text (_("Record sent and/or received data"));
         recordDialog.stopRecording.connect (this.stopRecording);
         recordDialog.startRecording.connect (this.startRecording);
-        recordLabel = (Label) builder.get_object ("record_label");
-        stopRecordingLabel = (Label) builder.get_object ("stop_recording_label");
+        recordLabel = (Label) gtkBuilder.get_object ("record_label");
+        stopRecordingLabel = (Label) gtkBuilder.get_object ("stop_recording_label");
 
         // setup preferences
         preferencesDialog = new PreferencesDialog (this.gtkWindow);
         preferencesDialog.updatePreferences.connect (this.updatePreferences);
-        ToolButton preferences = (ToolButton) builder.get_object ("toolbar_preferences");
+        ToolButton preferences = (ToolButton) gtkBuilder.get_object ("toolbar_preferences");
         preferences.clicked.connect (this.showPreferencesDialog);
         preferences.set_tooltip_text (_("Other preferences"));
 
         // setup connectbutton
-        connectButton = (ToggleToolButton) builder.get_object ("toolbar_connect");
+        connectButton = (ToggleToolButton) gtkBuilder.get_object ("toolbar_connect");
         connectButton.toggled.connect (this.connectButtonClick);
         connectButton.set_tooltip_text (_("Open/close port"));
-        disconnectLabel = (Label) builder.get_object ("disconnect_label");
-        connectLabel = (Label) builder.get_object ("connect_label");
+        disconnectLabel = (Label) gtkBuilder.get_object ("disconnect_label");
+        connectLabel = (Label) gtkBuilder.get_object ("connect_label");
 
         // setup help
-        Gtk.MenuItem contents = (Gtk.MenuItem)builder.get_object ("menubar_contents");
+        Gtk.MenuItem contents = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_contents");
         contents.activate.connect (showHelpAction);
 
         // setup incoming notebook
-        incoming_notebook = (Notebook) builder.get_object ("incoming_notebook");
+        incoming_notebook = (Notebook) gtkBuilder.get_object ("incoming_notebook");
         incoming_notebook.set_current_page (profile.getNotebookTab (false));
         incoming_notebook.switch_page.connect (onIncomingNotebookSwitchPage);
 
         // setup outgoing notebook
-        outgoing_notebook = (Notebook) builder.get_object ("outgoing_notebook");
+        outgoing_notebook = (Notebook) gtkBuilder.get_object ("outgoing_notebook");
         outgoing_notebook.set_current_page (profile.getNotebookTab (true));
         outgoing_notebook.switch_page.connect (onOutgoingNotebookSwitchPage);
 
@@ -259,39 +260,39 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
 
         echoTag = incomingAsciiTextBuffer.create_tag ("echo", null);
 
-        incomingHexTextView = (TextView) builder.get_object ("incoming_hex_textview");
+        incomingHexTextView = (TextView) gtkBuilder.get_object ("incoming_hex_textview");
         incomingHexTextView.set_buffer (incomingHexTextBuffer);
 
-        incomingAsciiTextView = (TextView) builder.get_object ("incoming_ascii_textview");
+        incomingAsciiTextView = (TextView) gtkBuilder.get_object ("incoming_ascii_textview");
         incomingAsciiTextView.set_buffer (incomingAsciiTextBuffer);
 
-        outgoingHexTextView = (TextView) builder.get_object ("outgoing_hex_textview");
+        outgoingHexTextView = (TextView) gtkBuilder.get_object ("outgoing_hex_textview");
         outgoingHexTextView.set_buffer (outgoingHexTextBuffer);
 
-        outgoingAsciiTextView = (TextView) builder.get_object ("outgoing_ascii_textview");
+        outgoingAsciiTextView = (TextView) gtkBuilder.get_object ("outgoing_ascii_textview");
         outgoingAsciiTextView.set_buffer (outgoingAsciiTextBuffer);
 
         // setup scrolling
-        ScrolledWindow incomingAsciiScrolledWindow = (ScrolledWindow) builder.get_object ("incoming_ascii_scrolledwindow");
+        ScrolledWindow incomingAsciiScrolledWindow = (ScrolledWindow) gtkBuilder.get_object ("incoming_ascii_scrolledwindow");
         va1 = incomingAsciiScrolledWindow.get_vadjustment ();
-        ScrolledWindow incomingHexScrolledWindow = (ScrolledWindow) builder.get_object ("incoming_hex_scrolledwindow");
+        ScrolledWindow incomingHexScrolledWindow = (ScrolledWindow) gtkBuilder.get_object ("incoming_hex_scrolledwindow");
         va2 = incomingHexScrolledWindow.get_vadjustment ();
-        ScrolledWindow outgoingAsciiScrolledWindow = (ScrolledWindow) builder.get_object ("outgoing_ascii_scrolledwindow");
+        ScrolledWindow outgoingAsciiScrolledWindow = (ScrolledWindow) gtkBuilder.get_object ("outgoing_ascii_scrolledwindow");
         va3 = outgoingAsciiScrolledWindow.get_vadjustment ();
-        ScrolledWindow outgoingHexScrolledWindow = (ScrolledWindow) builder.get_object ("outgoing_hex_scrolledwindow");
+        ScrolledWindow outgoingHexScrolledWindow = (ScrolledWindow) gtkBuilder.get_object ("outgoing_hex_scrolledwindow");
         va4 = outgoingHexScrolledWindow.get_vadjustment ();
         AutoScroll.setup (va1, va2, va3, va4);
 
         // setup entry
-        sendButton = (Button) builder.get_object ("send");
+        sendButton = (Button) gtkBuilder.get_object ("send");
         sendButton.clicked.connect (onSendButtonClicked);
         sendButton.set_tooltip_text (_("Send the outgoing data now."));
-        entry = (Gtk.Entry)builder.get_object ("entry");
+        entry = (Gtk.Entry)gtkBuilder.get_object ("entry");
         entry.set_text (profile.getInputString ());
         entry.activate.connect (onSendButtonClicked);
         entry.set_tooltip_text (_("Type outgoing data here. Press Enter or Send to send it."));
 
-        inputModeCombo = (ComboBox) builder.get_object ("input_mode");
+        inputModeCombo = (ComboBox) gtkBuilder.get_object ("input_mode");
         MoUtils.populateComboBox (inputModeCombo, inputModeStrings);
         if (profile.getInputModeHex ()) {
             inputModeCombo.set_active (inputModeValues.HEX);
@@ -300,7 +301,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         }
         inputModeCombo.changed.connect (inputModeChanged);
 
-        lineEndModeCombo = (ComboBox) builder.get_object ("termination_mode");
+        lineEndModeCombo = (ComboBox) gtkBuilder.get_object ("termination_mode");
         MoUtils.populateComboBox (lineEndModeCombo, SerialConnection.LineEndStrings);
         lineEndModeCombo.set_active (profile.getInputLineEnd ());
         lineEndModeCombo.changed.connect (lineEndChanged);
@@ -319,41 +320,41 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         recentChooserMenu.add_filter (filter);
         recentChooserMenu.set_show_numbers (true);
         recentChooserMenu.show_not_found = false;
-        Gtk.MenuItem recentFileItem = (Gtk.MenuItem)builder.get_object ("menubar_open_recent");
+        Gtk.MenuItem recentFileItem = (Gtk.MenuItem)gtkBuilder.get_object ("menubar_open_recent");
         recentFileItem.set_submenu (recentChooserMenu);
 
         // setup status bar for serial
-        Label label = (Label) builder.get_object ("labelStatusRI");
+        Label label = (Label) gtkBuilder.get_object ("labelStatusRI");
         label.set_sensitive (false);
         serialStatusSignals[0] = label;
-        label = (Label) builder.get_object ("labelStatusDSR");
+        label = (Label) gtkBuilder.get_object ("labelStatusDSR");
         label.set_sensitive (false);
         serialStatusSignals[1] = label;
-        label = (Label) builder.get_object ("labelStatusCD");
+        label = (Label) gtkBuilder.get_object ("labelStatusCD");
         label.set_sensitive (false);
         serialStatusSignals[2] = label;
-        label = (Label) builder.get_object ("labelStatusCTS");
+        label = (Label) gtkBuilder.get_object ("labelStatusCTS");
         label.set_sensitive (false);
         serialStatusSignals[3] = label;
         GLib.Timeout.add (200, (GLib.SourceFunc)showSerialStatus, 0);
 
         // setup DTR toggle button
-        dtrButton = (ToggleButton) builder.get_object ("buttonDTR");
+        dtrButton = (ToggleButton) gtkBuilder.get_object ("buttonDTR");
         dtrButton.toggled.connect (this.toggleDTR);
         dtrButton.set_tooltip_text (_("Toggle DTR signal status."));
 
         // setup RTS toggle button
-        rtsButton = (ToggleButton) builder.get_object ("buttonRTS");
+        rtsButton = (ToggleButton) gtkBuilder.get_object ("buttonRTS");
         rtsButton.toggled.connect (this.toggleRTS);
         rtsButton.set_tooltip_text (_("Toggle RTS signal status."));
 
         // setup incoming clear button
-        incomingClearButton = (Button) builder.get_object ("buttonIncomingClear");
+        incomingClearButton = (Button) gtkBuilder.get_object ("buttonIncomingClear");
         incomingClearButton.clicked.connect (clearIncoming);
         incomingClearButton.set_tooltip_text (_("Clear incoming text box."));
 
         // setup outgoing clear button
-        outgoingClearButton = (Button) builder.get_object ("buttonOutgoingClear");
+        outgoingClearButton = (Button) gtkBuilder.get_object ("buttonOutgoingClear");
         outgoingClearButton.clicked.connect (clearOutgoing);
         outgoingClearButton.set_tooltip_text (_("Clear outgoing text box."));
 
@@ -362,10 +363,11 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
         macros.loadFromProfile (profile);
         for (int i = 0; i < Macros.maxMacroCount; i++) {
             macros.getMacro (i).sendMacro.connect (onSendMacro);
-            Button btn = (Button) builder.get_object ("buttonMacro%i".printf (i + 1));
+            macros.getMacro (i).activeStatusChange.connect (onActiveStatusChanged);
+            Button btn = (Button) gtkBuilder.get_object ("buttonMacro%i".printf (i + 1));
             btn.clicked.connect (onSendMacroButtonClick);
         }
-        defineMacrosButton = (Button) builder.get_object ("buttonDefineMacros");
+        defineMacrosButton = (Button) gtkBuilder.get_object ("buttonDefineMacros");
         defineMacrosButton.clicked.connect (onDefineMacrosButtonClick);
 
         // take currentSettings into account for outgoing input area
@@ -449,20 +451,20 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
     }
 
     private void setWindowTitle (string ? recordingFilename) {
-        var builder = new StringBuilder ();
-        builder.append ("moserial");
+        var strBuilder = new StringBuilder ();
+        strBuilder.append ("moserial");
 
         if (profileFilename != null) {
-            builder.append (" - ");
-            builder.append (GLib.Path.get_basename (profileFilename));
+            strBuilder.append (" - ");
+            strBuilder.append (GLib.Path.get_basename (profileFilename));
         }
 
         if (recordingFilename != null) {
-            builder.append (" - ");
-            builder.append (GLib.Path.get_basename (recordingFilename));
+            strBuilder.append (" - ");
+            strBuilder.append (GLib.Path.get_basename (recordingFilename));
         }
 
-        gtkWindow.set_title (builder.str);
+        gtkWindow.set_title (strBuilder.str);
     }
 
     private void recentItemOpen (RecentChooser r) {
@@ -476,17 +478,17 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
     private void insertBufferEnd (TextBuffer buf, string s) {
         TextIter iter;
         int i;
-        var builder = new StringBuilder ();
+        var strBuilder = new StringBuilder ();
 
         for (i = 0; i < s.length; i++) {
             unichar c = s.get_char ();
             if (c.isprint () || c.isspace ())
-                builder.append_unichar (c);
+                strBuilder.append_unichar (c);
             s = s.next_char ();
         }
 
         buf.get_end_iter (out iter);
-        buf.insert (ref iter, builder.str, (int) builder.str.length);
+        buf.insert (ref iter, strBuilder.str, (int) strBuilder.str.length);
     }
 
     private void onSendButtonClicked (Widget w) {
@@ -534,8 +536,8 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
             }
         } else {
             try {
-                Regex rex = new Regex("[^0123456789ABCDEFabcdef]");
-                uchar[] h = InputParser.parseHex (rex.replace(s, s.length, 0, ""));
+                Regex rex = new Regex ("[^0123456789ABCDEFabcdef]");
+                uchar[] h = InputParser.parseHex (rex.replace (s, s.length, 0, ""));
                 len = h.length;
                 for (int x = 0; x < len; x++) {
                     serialConnection.sendByte (h[x]);
@@ -739,6 +741,9 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
                 font-family: %s;
                 font-size: %d%s;
                 font-weight: %d;
+            }
+            .ButtonLabelRed {
+                color: #FF0000;
             }
         """.printf (
             currentPreferences.fontColor,
@@ -1136,6 +1141,16 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
     private void onSendMacro (int index) {
         Macro m = macros.getMacro (index);
         sendString (m.Text, m.IsHex);
+    }
+
+    private void onActiveStatusChanged (int index) {
+        Macro m = macros.getMacro (index);
+        Button btn = (Button) gtkBuilder.get_object ("buttonMacro%i".printf (index + 1));
+        if (m.IsActive) {
+            btn.get_style_context ().add_class ("ButtonLabelRed");
+        } else {
+            btn.get_style_context ().remove_class ("ButtonLabelRed");
+        }
     }
 }
 
