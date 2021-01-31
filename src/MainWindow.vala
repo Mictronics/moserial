@@ -446,6 +446,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
             inputModeCombo.set_active (inputModeValues.ASCII);
         }
         lineEndModeCombo.set_active (profile.getInteger ("main_ui_controls", "input_line_end", 0));
+        entry.set_text(profile.getString("main_ui_controls", "input_string"));
         updateOutgoingInputArea ();
 
         // update preferences dialog
@@ -528,7 +529,7 @@ public class moserial.MainWindow : Gtk.Window // Have to extend Gtk.Winow to get
     }
 
     public void sendString (string s, bool isHex) {
-        profile.setString ("window", "input_string", s);
+        profile.setString ("main_ui_controls", "input_string", s);
         if (!ensureConnected ()) {
             return;
         }
