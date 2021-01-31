@@ -39,12 +39,14 @@ public class moserial.SettingsDialog : GLib.Object {
     private CheckButton softwareHandshake;
     private ComboBox accessModeCombo;
     private CheckButton localEcho;
+    private CheckButton autoConnect;
     private Gtk.ListStore deviceModel;
     private Gtk.Entry deviceInput;
     private Gtk.Entry baudRateInput;
     public signal void updateSettings (Settings settings);
 
-    public SettingsDialog (Window parent) {
+    public SettingsDialog (Window parent)
+    {
         this.parent = parent;
         var builder = new Gtk.Builder.from_resource (Config.UIROOT + "settings_dialog.ui");
 
@@ -78,6 +80,9 @@ public class moserial.SettingsDialog : GLib.Object {
 
         localEcho = (CheckButton) builder.get_object ("settings_local_echo");
         localEcho.set_tooltip_text (_("Normally disabled"));
+
+        autoConnect = (CheckButton) builder.get_object ("settings_auto_connect");
+        autoConnect.set_tooltip_text (_("Enable to automatically connect on startup or when a profile is loaded"));
 
         dialog.delete_event.connect (hide);
         cancelButton.clicked.connect (this.cancel);
@@ -175,6 +180,10 @@ public class moserial.SettingsDialog : GLib.Object {
             localEcho.set_active (true);
         else
             localEcho.set_active (false);
+        if (currentSettings.autoConnect)
+            autoConnect.set_active (true);
+        else
+            autoConnect.set_active (false);
     }
 
     public bool hide () {
@@ -197,6 +206,7 @@ public class moserial.SettingsDialog : GLib.Object {
         Settings.Handshake handshake;
         Settings.AccessMode accessMode;
         bool pLocalEcho;
+        bool pAutoConnect;
 
         if (deviceInput.get_text_length () == 0) {
             device = Settings.DEFAULT_DEVICEFILE;
@@ -231,7 +241,9 @@ public class moserial.SettingsDialog : GLib.Object {
         else
             handshake = Settings.Handshake.NONE;
         pLocalEcho = localEcho.get_active ();
-        settings = new Settings (device, baudRate, dataBits, stopBits, parity, handshake, accessMode, pLocalEcho);
+        pAutoConnect = autoConnect.get_active ();
+        settings = new Settings (device, baudRate, dataBits, stopBits, parity,
+                                 handshake, accessMode, pLocalEcho, pAutoConnect);
         currentSettings = settings;
         this.updateSettings (currentSettings);
         dialog.hide ();

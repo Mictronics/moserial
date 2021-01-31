@@ -29,7 +29,7 @@ public class moserial.Macro : GLib.Object {
             if (isActive) {
                 GLib.Timeout.add (cycle, (GLib.SourceFunc)onCycleTimeout, Priority.DEFAULT);
             }
-            this.activeStatusChange(index);
+            this.activeStatusChange (index);
         }
     }
 
@@ -68,7 +68,7 @@ public class moserial.Macro : GLib.Object {
     }
 
     public signal void sendMacro (int index);
-    public signal void activeStatusChange(int index);
+    public signal void activeStatusChange (int index);
 
     public Macro (int index) {
         this.index = index;
@@ -140,9 +140,9 @@ public class moserial.Macros : GLib.Object {
     public void saveToProfile (Profile profile) {
         for (int i = 0; i < maxMacroCount; i++) {
             string g = "macro%u".printf (i);
-            profile.keyFile.set_boolean (g, "is_hex", macros.nth_data (i).IsHex);
-            profile.keyFile.set_integer (g, "cycle", macros.nth_data (i).Cycle);
-            profile.keyFile.set_string (g, "text", macros.nth_data (i).Text);
+            profile.setBoolean (g, "is_hex", macros.nth_data (i).IsHex);
+            profile.setInteger (g, "cycle", macros.nth_data (i).Cycle);
+            profile.setString (g, "text", macros.nth_data (i).Text);
             // We don't save isActive here because macros shall be deactivated by default when application is loaded.
         }
     }
@@ -150,9 +150,9 @@ public class moserial.Macros : GLib.Object {
     public void loadFromProfile (Profile profile) {
         for (int i = 0; i < maxMacroCount; i++) {
             string g = "macro%u".printf (i);
-            macros.nth_data (i).IsHex = MoUtils.getKeyBoolean (profile, g, "is_hex", false);
-            macros.nth_data (i).Cycle = MoUtils.getKeyInteger (profile, g, "cycle", 1000);
-            macros.nth_data (i).Text = MoUtils.getKeyString (profile, g, "text");
+            macros.nth_data (i).IsHex = profile.getBoolean (g, "is_hex", false);
+            macros.nth_data (i).Cycle = profile.getInteger (g, "cycle", 1000);
+            macros.nth_data (i).Text = profile.getString (g, "text");
         }
     }
 }

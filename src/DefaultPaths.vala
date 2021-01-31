@@ -31,11 +31,11 @@ public class DefaultPaths : GLib.Object {
 
     public void saveToProfile (Profile profile) {
         if (recordTo != null)
-            profile.keyFile.set_string ("paths", "last_record_path", recordTo);
+            profile.setString ("paths", "last_record_path", recordTo);
         if (receiveTo != null)
-            profile.keyFile.set_string ("paths", "last_receive_path", receiveTo);
+            profile.setString ("paths", "last_receive_path", receiveTo);
         if (sendFrom != null)
-            profile.keyFile.set_string ("paths", "last_send_path", sendFrom);
+            profile.setString ("paths", "last_send_path", sendFrom);
     }
 
     public static DefaultPaths loadFromProfile (Profile profile) {
@@ -50,15 +50,12 @@ public class DefaultPaths : GLib.Object {
         return new DefaultPaths (RecordTo, ReceiveTo, SendFrom);
     }
 
-    public static string ? getPath (Profile profile, string group, string key) {
+    public static string ? getPath (Profile profile, string group, string key)
+    {
         string ? path = null;
-        try {
-            path = profile.keyFile.get_string (group, key);
-            if (!MoUtils.fileExists (path))
-                return null;
-        } catch (GLib.KeyFileError e) {
-            // stdout.printf("%s\n", e.message);
-        }
+        path = profile.getString (group, key);
+        if ((path == null) || !MoUtils.fileExists (path))
+            return null;
         return path;
     }
 }

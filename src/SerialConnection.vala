@@ -32,10 +32,10 @@ public class moserial.SerialConnection : GLib.Object {
     public string echoCompare = "";
 
     private Posix.termios newtio;
-    private Posix.termios restoretio;
     private int m_fd = -1;
     private GLib.IOChannel IOChannelFd;
     public signal void newData (uchar[] data, int size);
+    public signal void onError ();
 
     private int flags = 0;
 
@@ -51,6 +51,9 @@ public class moserial.SerialConnection : GLib.Object {
 
 
     uint ? sourceId;
+    uint ? sourceIdErr;
+    uint ? sourceIdHup;
+    uint ? sourceIdNval;
     bool localEcho;
     public bool doConnect (Settings settings) {
 
@@ -69,7 +72,6 @@ public class moserial.SerialConnection : GLib.Object {
         }
         Posix.tcflush (m_fd, Posix.TCIOFLUSH);
 
-        tcgetattr (m_fd, out restoretio);
         applySettings (settings);
         tcsetattr (m_fd, Posix.TCSANOW, newtio);
 
@@ -77,6 +79,12 @@ public class moserial.SerialConnection : GLib.Object {
 
         IOChannelFd = new GLib.IOChannel.unix_new (m_fd);
         sourceId = IOChannelFd.add_watch (GLib.IOCondition.IN, this.readBytes);
+        // G_IO_ERR is sometimes faster than G_IO_HUP when device is unplugged
+        sourceIdErr = IOChannelFd.add_watch (GLib.IOCondition.ERR, this.onUnplugged);
+        // G_IO_HUP is received when the serial port vanishes (unplugged USB)
+        sourceIdHup = IOChannelFd.add_watch (GLib.IOCondition.HUP, this.onUnplugged);
+        // G_IO_NVAL is the last resort when device is unplugged and you want to write
+        sourceIdNval = IOChannelFd.add_watch (GLib.IOCondition.NVAL, this.onUnplugged);
         localEcho = settings.localEcho;
         return true;
     }
@@ -103,7 +111,13 @@ public class moserial.SerialConnection : GLib.Object {
     public void doDisconnect () {
         if (connected) {
             GLib.Source.remove (sourceId);
+            GLib.Source.remove (sourceIdHup);
+            GLib.Source.remove (sourceIdErr);
+            GLib.Source.remove (sourceIdNval);
             sourceId = null;
+            sourceIdHup = null;
+            sourceIdErr = null;
+            sourceIdNval = null;
             try {
                 IOChannelFd.shutdown (true);
             } catch (GLib.IOChannelError e) {
@@ -123,6 +137,11 @@ public class moserial.SerialConnection : GLib.Object {
 
     public bool isConnected () {
         return connected;
+    }
+
+    private bool onUnplugged (GLib.IOChannel source, GLib.IOCondition condition) {
+        onError ();
+        return false;
     }
 
     private bool readBytes (GLib.IOChannel source, GLib.IOCondition condition) {
@@ -210,6 +229,10 @@ public class moserial.SerialConnection : GLib.Object {
         Posix.cfsetospeed (ref newtio, baudRate);
         Posix.cfsetispeed (ref newtio, baudRate);
 
+        Posix.cfmakeraw (ref newtio);
+        newtio.c_cc[Posix.VTIME] = 0;
+        newtio.c_cc[Posix.VMIN] = 1;
+
         // DataBits
         int dataBits;
         dataBits = settings.dataBits;
@@ -241,42 +264,17 @@ public class moserial.SerialConnection : GLib.Object {
         else if (settings.parity == Settings.Parity.ODD)
             newtio.c_cflag |= (Posix.PARENB | Posix.PARODD);
 
-        newtio.c_cflag &= ~Linux.Termios.CRTSCTS;
-
-
         // Stop Bits
         if (settings.stopBits == 2)
             newtio.c_cflag |= Posix.CSTOPB;
         else
             newtio.c_cflag &= ~Posix.CSTOPB;
 
-        // Input Settings
-        newtio.c_iflag = Posix.IGNBRK;
-
         // Handshake
         if (settings.handshake == Settings.Handshake.SOFTWARE || settings.handshake == Settings.Handshake.BOTH)
             newtio.c_iflag |= Posix.IXON | Posix.IXOFF;
         else
             newtio.c_iflag &= ~(Posix.IXON | Posix.IXOFF | Posix.IXANY);
-
-        newtio.c_lflag = 0;
-        newtio.c_oflag = 0;
-
-        newtio.c_cc[Posix.VTIME] = 1;
-        newtio.c_cc[Posix.VMIN] = 1;
-
-
-        // Some other port settings from minicom.
-
-        // newtio.c_iflag &= ~(IGNBRK | IGNCR | INLCR | ICRNL | IUCLC | IXANY | IXON | IXOFF | INPCK | ISTRIP);
-        // newtio.c_iflag &= ~(Posix.IGNBRK | Posix.IGNCR | Posix.InputMode.INLCR | Posix.InputMode.ICRNL | Posix.IXANY | Posix.IXON | Posix.IXOFF | Posix.INPCK | Posix.ISTRIP);
-        // newtio.c_iflag |= (Posix.BRKINT | Posix.IGNPAR);
-        // newtio.c_oflag &= ~Posix.OPOST;
-        // newtio.c_lflag &= ~(XCASE|ECHONL|NOFLSH);
-        newtio.c_lflag &= ~(Posix.ECHONL | Posix.NOFLSH);
-        // newtio.c_lflag &= ~(Posix.ICANON | Posix.ISIG | Posix.ECHO);
-        // newtio.c_cflag |= CREAD;
-        // newtio.c_cc[VTIME] = 5;
 
         if (settings.handshake == Settings.Handshake.HARDWARE || settings.handshake == Settings.Handshake.BOTH)
             newtio.c_cflag |= Linux.Termios.CRTSCTS;

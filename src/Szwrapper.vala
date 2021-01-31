@@ -40,7 +40,8 @@ public class moserial.Szwrapper : GLib.Object {
     public bool running = false;
 
     public string filename { get; construct; }
-    public Szwrapper (Protocol ? protocol, SerialConnection ? sc, string ? filename) {
+    public Szwrapper (Protocol ? protocol, SerialConnection ? sc, string ? filename)
+    {
         Protocol pro = protocol;
         GLib.Object (protocol: pro,
                      sc: sc,
@@ -152,7 +153,7 @@ public class moserial.Szwrapper : GLib.Object {
             if (!(message == ""))
                 updateStatus (message);
             if (messages.index_of ("Transfer complete", 0) >= 0) {
-                GLib.Timeout.add (2000, shutdown_timeout);                // Wait 2 seconds for for the final remote packet to get ackd
+                GLib.Timeout.add (2000, shutdown_timeout); // Wait 2 seconds for for the final remote packet to get ackd
                 // shutdown();
             }
             if (messages.index_of ("Transfer incomplete", 0) >= 0) {

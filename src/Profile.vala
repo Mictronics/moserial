@@ -20,107 +20,65 @@
 using Gtk;
 
 public class Profile : GLib.Object {
-    public KeyFile keyFile;
+    public bool profileChanged { get; private set; default = false; }
+
+    private KeyFile keyFile;
     construct {
         keyFile = new KeyFile ();
     }
-    public void saveWindowSize (int w, int h) {
-        if (w > 0)
-            keyFile.set_integer ("window", "width", w);
-        if (h > 0)
-            keyFile.set_integer ("window", "height", h);
-    }
 
-    public void saveWindowPanedPosition (int pos) {
-        keyFile.set_integer ("window", "paned_pos", pos);
-    }
-
-    public int getWindowPanedPosition () {
+    public string ? getString (string group, string key)
+    {
+        string ? result = null;
         try {
-            return keyFile.get_integer ("window", "paned_pos");
+            result = keyFile.get_string (group, key);
         } catch (GLib.KeyFileError e) {
-            return -1;
+            stdout.printf ("%s\n", e.message);
+        }
+        return result;
+    }
+
+    public void setString (string group, string key, string new_val) {
+        bool changed = (getString (group, key) != new_val);
+        keyFile.set_string (group, key, new_val);
+        if (changed) {
+            profileChanged = true;
         }
     }
 
-    public int getWindowWidth () {
+    public int getInteger (string group, string key, int default_val) {
+        int result = default_val;
         try {
-            return keyFile.get_integer ("window", "width");
+            result = keyFile.get_integer (group, key);
         } catch (GLib.KeyFileError e) {
-            return -1;
+            stdout.printf ("%s\n", e.message);
+        }
+        return result;
+    }
+
+    public void setInteger (string group, string key, int new_val) {
+        bool changed = (getInteger (group, key, 0) != new_val);
+        keyFile.set_integer (group, key, new_val);
+        if (changed) {
+            profileChanged = true;
         }
     }
 
-    public int getWindowHeight () {
+    public bool getBoolean (string group, string key, bool default_val) {
+        bool result = default_val;
         try {
-            return keyFile.get_integer ("window", "height");
+            result = keyFile.get_boolean (group, key);
         } catch (GLib.KeyFileError e) {
-            return -1;
+            stdout.printf ("%s\n", e.message);
         }
+        return result;
     }
 
-    public void setNotebookTab (bool outgoing, uint tab) {
-        string n = "incoming_tab";
-        if (outgoing) {
-            n = "outgoing_tab";
-        }
-
-        if (tab != 0) {
-            keyFile.set_integer ("window", n, 1);
-        } else {
-            keyFile.set_integer ("window", n, 0);
-        }
-    }
-
-    public int getNotebookTab (bool outgoing) {
-        string n = "incoming_tab";
-        if (outgoing) {
-            n = "outgoing_tab";
-        }
-
-        try {
-            if (keyFile.get_integer ("window", n) != 0) {
-                return 1;
-            }
-            return 0;
-        } catch (GLib.KeyFileError e) {
-            return 0;
-        }
-    }
-
-    public void setInputModeHex (bool hex) {
-        keyFile.set_boolean ("window", "input_mode_hex", hex);
-    }
-
-    public bool getInputModeHex () {
-        try {
-            return keyFile.get_boolean ("window", "input_mode_hex");
-        } catch (GLib.KeyFileError e) {
-            return false;
-        }
-    }
-
-    public void setInputLineEnd (int end) {
-        keyFile.set_integer ("window", "input_line_end", end);
-    }
-
-    public int getInputLineEnd () {
-        try {
-            return keyFile.get_integer ("window", "input_line_end");
-        } catch (GLib.KeyFileError e) {
-            return 0;
-        }
-    }
-
-    public void setInputString (string s) {
-        keyFile.set_string ("window", "input_string", s);
-    }
-
-    public string getInputString () {
-        try {
-            return keyFile.get_string ("window", "input_string");
-        } catch (GLib.KeyFileError e) {
-            return "";
+    public void setBoolean (string group, string key, bool new_val) {
+        bool changed = (getBoolean (group, key, false) != new_val);
+        keyFile.set_boolean (group, key, new_val);
+        if (changed) {
+            profileChanged = true;
         }
     }
 
@@ -133,12 +91,15 @@ public class Profile : GLib.Object {
             f = "%s/moserial.conf".printf (GLib.Environment.get_user_config_dir ());
         } else
             f = filename;
+
         try {
             keyFile.load_from_file (f, GLib.KeyFileFlags.NONE);
+            profileChanged = false;
             return true;
         } catch (GLib.KeyFileError e) {
             stdout.printf ("%s\n", e.message);
             /* try loading the non-broken parts of the profile - return true */
+            profileChanged = false;
             return true;
         } catch (GLib.FileError e) {
             if (!default_profile) {
@@ -180,5 +141,6 @@ public class Profile : GLib.Object {
                 errorDialog.destroy ();
             }
         }
+        profileChanged = false;
     }
 }
